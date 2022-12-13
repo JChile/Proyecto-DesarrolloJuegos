@@ -12,6 +12,7 @@ public class BarraScript : MonoBehaviour
     void Start()
     {
         slider = GetComponent<Slider>();
+        //
     
     }
     
