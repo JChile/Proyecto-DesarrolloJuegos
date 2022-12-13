@@ -39,11 +39,11 @@ public class ControlNave : MonoBehaviour
         {
             case "ColisionSegura":
                 print("Colision segura...");
-                SceneManager.LoadScene("Nivel2");
+                // SceneManager.LoadScene("Nivel2");
                 break;
 
             case "ColisionPeligrosa":
-                SceneManager.LoadScene("Nivel1");
+                // SceneManager.LoadScene("Nivel1");
                 print("Colision peligrosa...");
                 break;        
 
