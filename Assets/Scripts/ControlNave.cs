@@ -5,65 +5,66 @@ using UnityEngine.SceneManagement;
 
 public class ControlNave : MonoBehaviour
 {
-    BarraScript bar;
-    Rigidbody rigidbody;
-    Transform transform;
+    ControlBarra controlBarra;
+    Rigidbody rigidBody;
+    Transform transForm;
     AudioSource audiosource;
-
-    public float maxValue = 100f;
-    private const float coef = 5f;
-    public float currentValue;
+    Color colorBarra;
+    GameObject explosion;
+    ParticleSystem propulsion;
     
+    private float velRot = 10f;
+    private float velPro = 20f;      
+    private float curValue = 20f;        
 
-    void Start()
-    {
-        
-        
-        bar = GameObject.Find("BarraCombustible").GetComponent<BarraScript>();
-        rigidbody = GetComponent<Rigidbody>();
-        transform = GetComponent<Transform>();  
-        audiosource = GetComponent<AudioSource>();
-        currentValue = maxValue;
-        
+    void Start() 
+    {            
+        controlBarra = GameObject.Find("BarraCombustible").GetComponent<ControlBarra>();
+        propulsion = GameObject.Find("Propulsion").GetComponent<ParticleSystem>();
+        rigidBody = GetComponent<Rigidbody>();
+        transForm = GetComponent<Transform>();  
+        audiosource = GetComponent<AudioSource>();   
+        explosion = GameObject.Find("Explosion");
     }
     
-    void Update()
+    void Update() 
     {            
-        ProcesarInput();
-            
+        ProcesarInput();            
     }
     
     private void OnCollisionEnter(Collision collision) 
     {
-        switch(collision.gameObject.tag)
-        {
+        switch(collision.gameObject.tag) {
             case "ColisionSegura":
-                print("Colision segura...");
-                // SceneManager.LoadScene("Nivel2");
+                print("Colision segura...");                
                 break;
 
-            case "ColisionPeligrosa":
-                // SceneManager.LoadScene("Nivel1");
-                print("Colision peligrosa...");
+            case "ColisionPeligrosa":                                                                
+                print("Colision peligrosa..."); 
+                
+                Instantiate(explosion, transform.position, transform.rotation);
+                Destroy(gameObject);        
+                                     
                 break;        
-
         }
     }
     
-    private void ProcesarInput()
-    {
+    private void ProcesarInput() {
         Propulsion();
         Rotacion();
     }
 
-    private void Propulsion() {
-        if (Input.GetKey(KeyCode.Space))
+    private void Propulsion() 
+    {
+        if (Input.GetKey(KeyCode.Space) && curValue > 0) 
         {
-            bar.decreaseValue(coef*Time.deltaTime);
-            rigidbody.freezeRotation = true;
-            rigidbody.AddRelativeForce(Vector3.up);
-            
-            if(!audiosource.isPlaying)
+            rigidBody.AddRelativeForce(Vector3.up * velPro);            
+                        
+            controlBarra.decrementValue();
+            curValue = controlBarra.getValue();           
+            propulsion.Play();
+                   
+            if(!audiosource.isPlaying) 
             {
                 audiosource.Play();
             }            
@@ -71,23 +72,19 @@ public class ControlNave : MonoBehaviour
         else 
         {
             audiosource.Stop();
-        }
-        rigidbody.freezeRotation = false;
+            propulsion.Stop();
+        }        
+       
     }
 
     private void Rotacion() {
-        if(Input.GetKey(KeyCode.D))
+        if(Input.GetKey(KeyCode.D)) 
         {                        
-            var rotarDerecha = transform.rotation;
-            rotarDerecha.z -= Time.deltaTime * 0.5f;
-            transform.rotation = rotarDerecha;
-            bar.setValue(20f);
+            rigidBody.AddRelativeTorque(Vector3.back * velRot, ForceMode.Acceleration);
         }
-        else if(Input.GetKey(KeyCode.A))
+        else if(Input.GetKey(KeyCode.A)) 
         {                       
-            var rotarIzquierda = transform.rotation;
-            rotarIzquierda.z += Time.deltaTime * 0.5f;
-            transform.rotation = rotarIzquierda;
+            rigidBody.AddRelativeTorque(Vector3.forward * velRot, ForceMode.Acceleration);
         }
     }
 }
