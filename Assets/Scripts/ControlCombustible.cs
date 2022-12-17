@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ControlBarra : MonoBehaviour
+public class ControlCombustible : MonoBehaviour
 {
     Slider slider;
     Image image;  
     [SerializeField] Gradient gradient;
     
-    private float velCom = 4f;   
+    private float velCom = 5f;
+    
     
     void Start() 
     {

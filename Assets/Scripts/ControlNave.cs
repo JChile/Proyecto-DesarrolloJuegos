@@ -5,49 +5,91 @@ using UnityEngine.SceneManagement;
 
 public class ControlNave : MonoBehaviour
 {
-    ControlBarra controlBarra;
+    ControlCombustible controlCombustible;
+    ControlVida controlVida;
     Rigidbody rigidBody;
     Transform transForm;
+
     AudioSource audiosource;
-    Color colorBarra;
     GameObject explosion;
+    GameObject grupoEfecto;
+    GameObject unicoEfecto;
+
     ParticleSystem propulsion;
     
     private float velRot = 10f;
-    private float velPro = 20f;      
-    private float curValue = 20f;        
+    private float velPro = 20f;
+    private float actualVida = 20f;
+    private float actualComb = 20f;
+    private float valorSumaV = 4f;
+    private float valorSumaC = 6f;
 
     void Start() 
     {            
-        controlBarra = GameObject.Find("BarraCombustible").GetComponent<ControlBarra>();
+        grupoEfecto = GameObject.Find("Efectos"); 
+        controlCombustible = GameObject.Find("BarraCombustible").GetComponent<ControlCombustible>();
+        controlVida = GameObject.Find("BarraVida").GetComponent<ControlVida>();
         propulsion = GameObject.Find("Propulsion").GetComponent<ParticleSystem>();
         rigidBody = GetComponent<Rigidbody>();
         transForm = GetComponent<Transform>();  
         audiosource = GetComponent<AudioSource>();   
         explosion = GameObject.Find("Explosion");
+        rigidBody.sleepThreshold = 0;
     }
     
     void Update() 
     {            
-        ProcesarInput();            
+        ProcesarInput();
+             
     }
     
-    private void OnCollisionEnter(Collision collision) 
-    {
-        switch(collision.gameObject.tag) {
-            case "ColisionSegura":
-                print("Colision segura...");                
+    private void OnTriggerEnter(Collider other){      
+
+        switch(other.gameObject.tag) {
+            case "ColisionRecarga": 
+                controlCombustible.setValue(actualComb + valorSumaC);
+                unicoEfecto = Instantiate(grupoEfecto.transform.GetChild(0).gameObject, other.transform.position, other.transform.rotation);                
+                unicoEfecto.GetComponent<ParticleSystem>().Play();
+                Destroy(other.gameObject);                
                 break;
 
-            case "ColisionPeligrosa":                                                                
-                print("Colision peligrosa..."); 
-                
-                Instantiate(explosion, transform.position, transform.rotation);
-                Destroy(gameObject);        
-                                     
+            case "ColisionVida":                        
+                controlVida.setValue(actualVida + valorSumaV);
+                unicoEfecto = Instantiate(grupoEfecto.transform.GetChild(1).gameObject, other.transform.position, other.transform.rotation);
+                unicoEfecto.GetComponent<ParticleSystem>().Play();
+                Destroy(other.gameObject);                
+                break;                 
+        } 
+    }
+
+    private void OnCollisionEnter(Collision collision) 
+    {        
+        switch(collision.gameObject.tag) {
+            case "ColisionSegura":
+                              
+                break;              
+        }
+    }
+
+    private void OnCollisionStay(Collision collision) 
+    {          
+        switch(collision.gameObject.tag) {            
+            case "ColisionPeligrosa":                                                                 
+
+                if(!controlVida.getEstado() && (controlVida.getValue() <= 4 || controlCombustible.getValue() <= 0)) {
+                    controlVida.setValue(0f);                                                
+                    unicoEfecto = Instantiate(grupoEfecto.transform.GetChild(2).gameObject, transform.position, transform.rotation);
+                    unicoEfecto.GetComponent<ParticleSystem>().Play();
+                    actualVida = 0; 
+                    Destroy(gameObject); 
+                } else {
+                    controlVida.getDamage(); 
+                    actualVida = controlVida.getValue();                    
+                }                                                      
                 break;        
         }
     }
+
     
     private void ProcesarInput() {
         Propulsion();
@@ -56,12 +98,11 @@ public class ControlNave : MonoBehaviour
 
     private void Propulsion() 
     {
-        if (Input.GetKey(KeyCode.Space) && curValue > 0) 
+        if (Input.GetKey(KeyCode.Space) && controlCombustible.getValue() > 0) 
         {
-            rigidBody.AddRelativeForce(Vector3.up * velPro);            
-                        
-            controlBarra.decrementValue();
-            curValue = controlBarra.getValue();           
+            rigidBody.AddRelativeForce(Vector3.up * velPro);                                    
+            controlCombustible.decrementValue(); 
+            actualComb = controlCombustible.getValue();
             propulsion.Play();
                    
             if(!audiosource.isPlaying) 
