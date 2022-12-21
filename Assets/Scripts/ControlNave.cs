@@ -7,14 +7,13 @@ public class ControlNave : MonoBehaviour
 {
     ControlCombustible controlCombustible;
     ControlVida controlVida;
+    ControlTiempo controlTiempo;
     Rigidbody rigidBody;
     Transform transForm;
 
-    AudioSource audiosource;
-    GameObject explosion;
+    AudioSource audiosource;    
     GameObject grupoEfecto;
     GameObject unicoEfecto;
-
     ParticleSystem propulsion;
     
     private float velRot = 10f;
@@ -29,17 +28,29 @@ public class ControlNave : MonoBehaviour
         grupoEfecto = GameObject.Find("Efectos"); 
         controlCombustible = GameObject.Find("BarraCombustible").GetComponent<ControlCombustible>();
         controlVida = GameObject.Find("BarraVida").GetComponent<ControlVida>();
+        controlTiempo = GameObject.Find("Tiempo").GetComponent<ControlTiempo>();
         propulsion = GameObject.Find("Propulsion").GetComponent<ParticleSystem>();
         rigidBody = GetComponent<Rigidbody>();
         transForm = GetComponent<Transform>();  
-        audiosource = GetComponent<AudioSource>();   
-        explosion = GameObject.Find("Explosion");
+        audiosource = GetComponent<AudioSource>();           
         rigidBody.sleepThreshold = 0;
     }
     
     void Update() 
     {            
         ProcesarInput();
+        
+        if(controlTiempo.getTiempo() <= 0) {
+            controlVida.stopParpa();
+            if(!controlVida.getEstadoAnim()) {
+                controlVida.setValue(0f);                                                
+                unicoEfecto = Instantiate(grupoEfecto.transform.GetChild(2).gameObject, transform.position, transform.rotation);
+                unicoEfecto.GetComponent<ParticleSystem>().Play();
+                actualVida = 0; 
+                Destroy(gameObject);
+
+            }
+        }
              
     }
     

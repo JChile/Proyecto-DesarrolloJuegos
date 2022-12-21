@@ -15,6 +15,7 @@ public class ControlVida : MonoBehaviour
     private float parpaTie = 0.15f;
     private bool estadoParpa = false;
     private bool estadoInven = false;
+    private bool estadoAnim = false;
 
     
     void Start()
@@ -27,6 +28,7 @@ public class ControlVida : MonoBehaviour
     {            
         if(invenCon > 0)
         {
+            estadoAnim = true;
             invenCon -= Time.deltaTime;  
             parpaCon -= Time.deltaTime;
 
@@ -58,12 +60,16 @@ public class ControlVida : MonoBehaviour
                 estadoInven = false;             
             }
         }
+        estadoAnim = false;
     }
 
+    public void stopParpa() 
+    {        
+        invenCon = 0;        
+    }
     
     public void setValue(float v) 
-    {
-        print("asd");
+    {        
         slider.value = v;        
     }
 
@@ -76,6 +82,12 @@ public class ControlVida : MonoBehaviour
     {
         return estadoInven;
     }
+
+    public bool getEstadoAnim()
+    {
+        return estadoAnim;
+    }
+
 
     public void getDamage()
     {        
