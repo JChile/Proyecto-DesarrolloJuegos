@@ -26,6 +26,10 @@ public class ControlVida : MonoBehaviour
 
     void Update()
     {            
+        ProcesarParpadeo();        
+    }
+
+    private void ProcesarParpadeo(){
         if(invenCon > 0)
         {
             estadoAnim = true;
@@ -60,7 +64,9 @@ public class ControlVida : MonoBehaviour
                 estadoInven = false;             
             }
         }
-        estadoAnim = false;
+        else if(estadoAnim) {
+            estadoAnim = false;
+        }
     }
 
     public void stopParpa() 

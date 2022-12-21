@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Niveles/Nivel1.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Niveles/Nivel 1 Estatico.unity
+    guid: c52919580eb5c994f9dc60eef124cd1f
   - enabled: 1
-    path: Assets/Niveles/Nivel2.unity
-    guid: 9af80a6d2f08d6b43935820af0579ecf
+    path: Assets/Niveles/Nivel 2 Dinamico.unity
+    guid: 1a9b030f9a94d6b44a23524e5e9e6612
   m_configObjects: {}

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ControlTiempo : MonoBehaviour
 {
-    private float timeStart = 10;
+    private float timeStart = 20;
     private float timeEnd = 0;
     private bool timeOn = true;
     private Text textBox;
@@ -19,6 +19,21 @@ public class ControlTiempo : MonoBehaviour
     
     void Update()
     {
+        ProcesarFlujo();   
+    }
+
+    public void setOff()
+    {
+        timeOn = false;
+    }
+    
+    public float getTiempo() 
+    {
+        return timeStart;
+    }
+
+    private void ProcesarFlujo() 
+    {
         if(timeOn) 
         {
             timeStart -= Time.deltaTime;
@@ -26,17 +41,12 @@ public class ControlTiempo : MonoBehaviour
             if(timeStart <= 0) {
                 timeOff();
             }
-        }                    
-    }
-
-    public float getTiempo() 
-    {
-        return timeStart;
+        }   
     }
 
     public void timeOff() 
     {
-        timeOn = false;
+        setOff();
         textBox.text = timeEnd.ToString("F2");
     }
 }

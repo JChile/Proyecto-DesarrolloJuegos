@@ -24,7 +24,8 @@ public class ControlNave : MonoBehaviour
     private float valorSumaC = 6f;
 
     void Start() 
-    {            
+    {         
+
         grupoEfecto = GameObject.Find("Efectos"); 
         controlCombustible = GameObject.Find("BarraCombustible").GetComponent<ControlCombustible>();
         controlVida = GameObject.Find("BarraVida").GetComponent<ControlVida>();
@@ -39,19 +40,7 @@ public class ControlNave : MonoBehaviour
     void Update() 
     {            
         ProcesarInput();
-        
-        if(controlTiempo.getTiempo() <= 0) {
-            controlVida.stopParpa();
-            if(!controlVida.getEstadoAnim()) {
-                controlVida.setValue(0f);                                                
-                unicoEfecto = Instantiate(grupoEfecto.transform.GetChild(2).gameObject, transform.position, transform.rotation);
-                unicoEfecto.GetComponent<ParticleSystem>().Play();
-                actualVida = 0; 
-                Destroy(gameObject);
-
-            }
-        }
-             
+        ProcesarTiempo();                        
     }
     
     private void OnTriggerEnter(Collider other){      
@@ -76,8 +65,12 @@ public class ControlNave : MonoBehaviour
     private void OnCollisionEnter(Collision collision) 
     {        
         switch(collision.gameObject.tag) {
-            case "ColisionSegura":
-                              
+            case "ColisionNivel":
+                rigidBody.isKinematic = true; 
+                unicoEfecto = Instantiate(grupoEfecto.transform.GetChild(3).gameObject, collision.transform.position, collision.transform.rotation);
+                unicoEfecto.GetComponent<ParticleSystem>().Play();            
+                controlTiempo.setOff();               
+                StartCoroutine(EsperarSiguiente()); 
                 break;              
         }
     }
@@ -86,13 +79,8 @@ public class ControlNave : MonoBehaviour
     {          
         switch(collision.gameObject.tag) {            
             case "ColisionPeligrosa":                                                                 
-
                 if(!controlVida.getEstado() && (controlVida.getValue() <= 4 || controlCombustible.getValue() <= 0)) {
-                    controlVida.setValue(0f);                                                
-                    unicoEfecto = Instantiate(grupoEfecto.transform.GetChild(2).gameObject, transform.position, transform.rotation);
-                    unicoEfecto.GetComponent<ParticleSystem>().Play();
-                    actualVida = 0; 
-                    Destroy(gameObject); 
+                    Destruccion();
                 } else {
                     controlVida.getDamage(); 
                     actualVida = controlVida.getValue();                    
@@ -100,11 +88,40 @@ public class ControlNave : MonoBehaviour
                 break;        
         }
     }
-
     
     private void ProcesarInput() {
         Propulsion();
         Rotacion();
+    }
+
+    private void ProcesarTiempo() {
+        if(controlTiempo.getTiempo() <= 0) {
+            controlVida.stopParpa();
+            if(!controlVida.getEstadoAnim()) {
+                Destruccion();
+                
+            }
+        }
+    }
+
+    private void Destruccion() {
+        controlTiempo.StartCoroutine(EsperarReinicio());   
+        
+        controlVida.setValue(0f);                                                
+        unicoEfecto = Instantiate(grupoEfecto.transform.GetChild(2).gameObject, transform.position, transform.rotation);
+        unicoEfecto.GetComponent<ParticleSystem>().Play();
+        actualVida = 0;         
+        Destroy(gameObject);   
+    }
+
+    private IEnumerator EsperarSiguiente() {
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    private IEnumerator EsperarReinicio(){
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void Propulsion() 
@@ -114,8 +131,7 @@ public class ControlNave : MonoBehaviour
             rigidBody.AddRelativeForce(Vector3.up * velPro);                                    
             controlCombustible.decrementValue(); 
             actualComb = controlCombustible.getValue();
-            propulsion.Play();
-                   
+            propulsion.Play();            
             if(!audiosource.isPlaying) 
             {
                 audiosource.Play();
