@@ -7,6 +7,7 @@ public class ControlVida : MonoBehaviour
 {
     Slider slider; 
     Renderer[] componentes;
+    AudioSource golpe;
 
     private float cantVida = 4f; 
     private float invenCon;
@@ -19,9 +20,11 @@ public class ControlVida : MonoBehaviour
 
     
     void Start()
-    {
+    {    
         slider = GetComponent<Slider>();
-        componentes = GameObject.Find("Cohete").GetComponentsInChildren<Renderer>();        
+        componentes = GameObject.Find("Cohete").GetComponentsInChildren<Renderer>();
+        golpe = GameObject.Find("Nave").GetComponents<AudioSource>()[2];
+
     }
 
     void Update()
@@ -99,6 +102,7 @@ public class ControlVida : MonoBehaviour
     {        
         if(invenCon <= 0) 
         {            
+            golpe.Play();
             slider.value -= cantVida;
             invenCon = invenTie;
             parpaCon = parpaTie;

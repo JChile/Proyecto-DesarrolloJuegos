@@ -6839,6 +6839,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Plataforma segura
       objectReference: {fileID: 0}
+    - target: {fileID: 1074900088225984647, guid: 2b49bec47c918ca4182538043f8197c3, type: 3}
+      propertyPath: m_TagString
+      value: ColisionNivel
+      objectReference: {fileID: 0}
     - target: {fileID: 1074900088225984649, guid: 2b49bec47c918ca4182538043f8197c3, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -16447,6 +16451,22 @@ PrefabInstance:
     - target: {fileID: 614485581300660230, guid: 61018e61b2dd95542891f6e84c5394d6, type: 3}
       propertyPath: m_Name
       value: Efectos
+      objectReference: {fileID: 0}
+    - target: {fileID: 1838718941428714786, guid: 61018e61b2dd95542891f6e84c5394d6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a850383354979d44da074ed69c05bea0, type: 2}
+    - target: {fileID: 5945097665443388704, guid: 61018e61b2dd95542891f6e84c5394d6, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5945097665443388704, guid: 61018e61b2dd95542891f6e84c5394d6, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 5945097665443388704, guid: 61018e61b2dd95542891f6e84c5394d6, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61018e61b2dd95542891f6e84c5394d6, type: 3}

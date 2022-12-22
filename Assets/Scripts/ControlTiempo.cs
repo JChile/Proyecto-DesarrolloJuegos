@@ -9,12 +9,14 @@ public class ControlTiempo : MonoBehaviour
     private float timeEnd = 0;
     private bool timeOn = true;
     private Text textBox;
+    AudioSource sonido;
     
 
     void Start() 
     {            
         textBox = GameObject.Find("Temporizador").GetComponent<Text>();
-        textBox.text = timeStart.ToString("F2");    
+        textBox.text = timeStart.ToString("F2"); 
+        sonido = GetComponent<AudioSource>();
     }
     
     void Update()
@@ -30,6 +32,11 @@ public class ControlTiempo : MonoBehaviour
     public float getTiempo() 
     {
         return timeStart;
+    }
+
+    public void explosion()
+    {
+        sonido.Play();
     }
 
     private void ProcesarFlujo() 

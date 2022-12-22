@@ -11,13 +11,18 @@ public class ControlNave : MonoBehaviour
     AudioClip damage_sound_clip;
     Rigidbody rigidBody;
     Transform transForm;
+<<<<<<< HEAD
     AudioSource audiosource;    
+=======
+    AudioSource[] sonidos;
+
+>>>>>>> origin/Test
     GameObject grupoEfecto;
     GameObject unicoEfecto;
     ParticleSystem propulsion;
     
-    private float velRot = 10f;
-    private float velPro = 20f;
+    private float velRot = 20f;
+    private float velPro = 30f;
     private float actualVida = 20f;
     private float actualComb = 20f;
     private float valorSumaV = 4f;
@@ -32,8 +37,9 @@ public class ControlNave : MonoBehaviour
         controlTiempo = GameObject.Find("Tiempo").GetComponent<ControlTiempo>();
         propulsion = GameObject.Find("Propulsion").GetComponent<ParticleSystem>();
         rigidBody = GetComponent<Rigidbody>();
-        transForm = GetComponent<Transform>();  
-        audiosource = GetComponent<AudioSource>();           
+        transForm = GetComponent<Transform>(); 
+        sonidos = GetComponents<AudioSource>();   
+        
         rigidBody.sleepThreshold = 0;
         damage_sound_clip = AudioClip.Create("damage_sound",audiosource.clip.samples,audiosource.clip.channels,audiosource.clip.frequency,true);
     }
@@ -48,13 +54,15 @@ public class ControlNave : MonoBehaviour
 
         switch(other.gameObject.tag) {
             case "ColisionRecarga": 
+                sonidos[1].Play();
                 controlCombustible.setValue(actualComb + valorSumaC);
                 unicoEfecto = Instantiate(grupoEfecto.transform.GetChild(0).gameObject, other.transform.position, other.transform.rotation);                
                 unicoEfecto.GetComponent<ParticleSystem>().Play();
                 Destroy(other.gameObject);                
                 break;
 
-            case "ColisionVida":                        
+            case "ColisionVida":
+                sonidos[1].Play();               
                 controlVida.setValue(actualVida + valorSumaV);
                 unicoEfecto = Instantiate(grupoEfecto.transform.GetChild(1).gameObject, other.transform.position, other.transform.rotation);
                 unicoEfecto.GetComponent<ParticleSystem>().Play();
@@ -67,13 +75,19 @@ public class ControlNave : MonoBehaviour
     {        
         switch(collision.gameObject.tag) {
             case "ColisionNivel":
+                sonidos[3].Play();
                 rigidBody.isKinematic = true; 
                 unicoEfecto = Instantiate(grupoEfecto.transform.GetChild(3).gameObject, collision.transform.position, collision.transform.rotation);
                 unicoEfecto.GetComponent<ParticleSystem>().Play();            
                 controlTiempo.setOff();               
                 StartCoroutine(EsperarSiguiente()); 
+<<<<<<< HEAD
                 // print("COLLISION NIVEL 1*****+");
                 break;              
+=======
+                break;
+            
+>>>>>>> origin/Test
         }
     }
 
@@ -86,6 +100,7 @@ public class ControlNave : MonoBehaviour
                 } else {
                     audiosource.PlayOneShot(damage_sound_clip,0.7f);
                     controlVida.getDamage(); 
+<<<<<<< HEAD
                     actualVida = controlVida.getValue();                    
                     //AudioSource.PlayClipAtPoint(damage_sound_clip,transForm.position, 0.9f);
                                         
@@ -93,6 +108,10 @@ public class ControlNave : MonoBehaviour
                 }                     
                 break;
             default:
+=======
+                    actualVida = controlVida.getValue();                 
+                }                                                      
+>>>>>>> origin/Test
                 break;        
         }
     }
@@ -114,7 +133,7 @@ public class ControlNave : MonoBehaviour
 
     private void Destruccion() {
         controlTiempo.StartCoroutine(EsperarReinicio());   
-        
+        controlTiempo.explosion();
         controlVida.setValue(0f);                                                
         unicoEfecto = Instantiate(grupoEfecto.transform.GetChild(2).gameObject, transform.position, transform.rotation);
         unicoEfecto.GetComponent<ParticleSystem>().Play();
@@ -140,14 +159,14 @@ public class ControlNave : MonoBehaviour
             controlCombustible.decrementValue(); 
             actualComb = controlCombustible.getValue();
             propulsion.Play();            
-            if(!audiosource.isPlaying) 
+            if(!sonidos[0].isPlaying) 
             {
-                audiosource.Play();
+                sonidos[0].Play();
             }            
         } 
         else 
         {
-            audiosource.Stop();
+            sonidos[0].Stop();
             propulsion.Stop();
         }        
        
