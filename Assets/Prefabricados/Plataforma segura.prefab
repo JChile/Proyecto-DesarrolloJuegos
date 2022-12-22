@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1074900088225984646}
   m_Layer: 0
   m_Name: Plataforma segura
-  m_TagString: ColisionSegura
+  m_TagString: ColisionNivel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
