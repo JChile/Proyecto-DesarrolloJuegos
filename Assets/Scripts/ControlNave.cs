@@ -37,7 +37,7 @@ public class ControlNave : MonoBehaviour
         sonidos = GetComponents<AudioSource>();   
         
         rigidBody.sleepThreshold = 0;
-        damage_sound_clip = AudioClip.Create("damage_sound",audiosource.clip.samples,audiosource.clip.channels,audiosource.clip.frequency,true);
+        // damage_sound_clip = AudioClip.Create("damage_sound",audiosource.clip.samples,audiosource.clip.channels,audiosource.clip.frequency,true);
     }
     
     void Update() 
@@ -89,10 +89,9 @@ public class ControlNave : MonoBehaviour
                 if(!controlVida.getEstado() && (controlVida.getValue() <= 4 || controlCombustible.getValue() <= 0)) {
                     Destruccion();
                 } else {
-                    audiosource.PlayOneShot(damage_sound_clip,0.7f);
                     controlVida.getDamage(); 
                     actualVida = controlVida.getValue();                 
-                }                                                      
+                }
                 break;        
         }
     }
