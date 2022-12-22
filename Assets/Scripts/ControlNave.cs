@@ -20,10 +20,10 @@ public class ControlNave : MonoBehaviour
     private float velRot = 20f;
     private float velPro = 30f;
     private float actualVida = 20f;
-    private float actualComb = 20f;
+    private float actualComb = 40f;
     private float valorSumaV = 4f;
-    private float valorSumaC = 6f;
-
+    private float valorSumaC = 14f;
+    public float forceAmount = 1;
     void Start() 
     {         
 
@@ -35,7 +35,7 @@ public class ControlNave : MonoBehaviour
         rigidBody = GetComponent<Rigidbody>();
         transForm = GetComponent<Transform>(); 
         sonidos = GetComponents<AudioSource>();   
-        GameObject.FindGameObjectWithTag("MusicaTag").GetComponent<ControlMusica>().PlayMusic();
+        //GameObject.FindGameObjectWithTag("MusicaTag").GetComponent<ControlMusica>().PlayMusic();
         
         rigidBody.sleepThreshold = 0;
         // damage_sound_clip = AudioClip.Create("damage_sound",audiosource.clip.samples,audiosource.clip.channels,audiosource.clip.frequency,true);
@@ -135,7 +135,8 @@ public class ControlNave : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space) && controlCombustible.getValue() > 0) 
         {
-            rigidBody.AddRelativeForce(Vector3.up * velPro);                                    
+            // rigidBody.AddRelativeForce(Vector3.up * velPro);  
+            rigidBody.AddRelativeForce(Vector3.up*forceAmount,ForceMode.Impulse);                                  
             controlCombustible.decrementValue(); 
             actualComb = controlCombustible.getValue();
             propulsion.Play();            
