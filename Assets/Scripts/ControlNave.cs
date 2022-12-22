@@ -106,7 +106,6 @@ public class ControlNave : MonoBehaviour
             controlVida.stopParpa();
             if(!controlVida.getEstadoAnim()) {
                 Destruccion();
-                
             }
         }
     }
