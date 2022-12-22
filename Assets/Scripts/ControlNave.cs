@@ -34,6 +34,7 @@ public class ControlNave : MonoBehaviour
         rigidBody = GetComponent<Rigidbody>();
         transForm = GetComponent<Transform>(); 
         sonidos = GetComponents<AudioSource>();   
+        GameObject.FindGameObjectWithTag("MusicaTag").GetComponent<ControlMusica>().PlayMusic();
         
         rigidBody.sleepThreshold = 0;
     }
