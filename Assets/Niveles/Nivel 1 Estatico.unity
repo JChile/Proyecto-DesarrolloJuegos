@@ -6839,14 +6839,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Plataforma segura
       objectReference: {fileID: 0}
-    - target: {fileID: 1074900088225984647, guid: 2b49bec47c918ca4182538043f8197c3, type: 3}
-      propertyPath: m_TagString
-      value: ColisionNivel
-      objectReference: {fileID: 0}
-    - target: {fileID: 1074900088225984649, guid: 2b49bec47c918ca4182538043f8197c3, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1074900088225984651, guid: 2b49bec47c918ca4182538043f8197c3, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -7553,29 +7545,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 708988332755573696, guid: ace4de2b4a8b9db4988c2ca181b0047e, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3930972447092026419, guid: ace4de2b4a8b9db4988c2ca181b0047e, type: 3}
       propertyPath: m_Name
       value: Terreno
       objectReference: {fileID: 0}
-    - target: {fileID: 3930972447092026419, guid: ace4de2b4a8b9db4988c2ca181b0047e, type: 3}
-      propertyPath: m_TagString
-      value: ColisionPeligrosa
-      objectReference: {fileID: 0}
     - target: {fileID: 5111000360255718578, guid: ace4de2b4a8b9db4988c2ca181b0047e, type: 3}
       propertyPath: m_RootOrder
       value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5111000360255718578, guid: ace4de2b4a8b9db4988c2ca181b0047e, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 195.78
-      objectReference: {fileID: 0}
-    - target: {fileID: 5111000360255718578, guid: ace4de2b4a8b9db4988c2ca181b0047e, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 25.762064
       objectReference: {fileID: 0}
     - target: {fileID: 5111000360255718578, guid: ace4de2b4a8b9db4988c2ca181b0047e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11206,25 +11182,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4550801607769807109, guid: 96f2540f78a3f8345a5fd5953a845e31, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4550801607769807111, guid: 96f2540f78a3f8345a5fd5953a845e31, type: 3}
       propertyPath: m_RootOrder
       value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4550801607769807111, guid: 96f2540f78a3f8345a5fd5953a845e31, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 7.7086806
-      objectReference: {fileID: 0}
-    - target: {fileID: 4550801607769807111, guid: 96f2540f78a3f8345a5fd5953a845e31, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4550801607769807111, guid: 96f2540f78a3f8345a5fd5953a845e31, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 6.0277243
       objectReference: {fileID: 0}
     - target: {fileID: 4550801607769807111, guid: 96f2540f78a3f8345a5fd5953a845e31, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11266,21 +11226,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4550801607769807114, guid: 96f2540f78a3f8345a5fd5953a845e31, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4550801607769807114, guid: 96f2540f78a3f8345a5fd5953a845e31, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4550801607769807115, guid: 96f2540f78a3f8345a5fd5953a845e31, type: 3}
       propertyPath: m_Name
       value: Plataforma de despegue
-      objectReference: {fileID: 0}
-    - target: {fileID: 4550801607769807115, guid: 96f2540f78a3f8345a5fd5953a845e31, type: 3}
-      propertyPath: m_TagString
-      value: ColisionSegura
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96f2540f78a3f8345a5fd5953a845e31, type: 3}
@@ -16451,22 +16399,6 @@ PrefabInstance:
     - target: {fileID: 614485581300660230, guid: 61018e61b2dd95542891f6e84c5394d6, type: 3}
       propertyPath: m_Name
       value: Efectos
-      objectReference: {fileID: 0}
-    - target: {fileID: 1838718941428714786, guid: 61018e61b2dd95542891f6e84c5394d6, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: a850383354979d44da074ed69c05bea0, type: 2}
-    - target: {fileID: 5945097665443388704, guid: 61018e61b2dd95542891f6e84c5394d6, type: 3}
-      propertyPath: looping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5945097665443388704, guid: 61018e61b2dd95542891f6e84c5394d6, type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 0.89
-      objectReference: {fileID: 0}
-    - target: {fileID: 5945097665443388704, guid: 61018e61b2dd95542891f6e84c5394d6, type: 3}
-      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
-      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61018e61b2dd95542891f6e84c5394d6, type: 3}

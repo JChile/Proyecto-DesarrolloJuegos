@@ -35,6 +35,7 @@ public class ControlNave : MonoBehaviour
         rigidBody = GetComponent<Rigidbody>();
         transForm = GetComponent<Transform>(); 
         sonidos = GetComponents<AudioSource>();   
+        GameObject.FindGameObjectWithTag("MusicaTag").GetComponent<ControlMusica>().PlayMusic();
         
         rigidBody.sleepThreshold = 0;
         // damage_sound_clip = AudioClip.Create("damage_sound",audiosource.clip.samples,audiosource.clip.channels,audiosource.clip.frequency,true);
