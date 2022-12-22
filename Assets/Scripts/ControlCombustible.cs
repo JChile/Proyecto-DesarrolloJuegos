@@ -9,7 +9,7 @@ public class ControlCombustible : MonoBehaviour
     Image image;  
     [SerializeField] Gradient gradient;
     
-    private float velCom = 4.5f;
+    private float velCom = 5f;
     
     
     void Start() 

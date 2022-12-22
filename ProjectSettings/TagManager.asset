@@ -8,6 +8,7 @@ TagManager:
   - ColisionPeligrosa
   - ColisionRecarga
   - ColisionVida
+  - ColisionNivel
   layers:
   - Default
   - TransparentFX
