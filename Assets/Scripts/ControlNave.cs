@@ -8,9 +8,9 @@ public class ControlNave : MonoBehaviour
     ControlCombustible controlCombustible;
     ControlVida controlVida;
     ControlTiempo controlTiempo;
+    AudioClip damage_sound_clip;
     Rigidbody rigidBody;
     Transform transForm;
-
     AudioSource audiosource;    
     GameObject grupoEfecto;
     GameObject unicoEfecto;
@@ -35,6 +35,7 @@ public class ControlNave : MonoBehaviour
         transForm = GetComponent<Transform>();  
         audiosource = GetComponent<AudioSource>();           
         rigidBody.sleepThreshold = 0;
+        damage_sound_clip = AudioClip.Create("damage_sound",audiosource.clip.samples,audiosource.clip.channels,audiosource.clip.frequency,true);
     }
     
     void Update() 
@@ -71,6 +72,7 @@ public class ControlNave : MonoBehaviour
                 unicoEfecto.GetComponent<ParticleSystem>().Play();            
                 controlTiempo.setOff();               
                 StartCoroutine(EsperarSiguiente()); 
+                // print("COLLISION NIVEL 1*****+");
                 break;              
         }
     }
@@ -82,9 +84,15 @@ public class ControlNave : MonoBehaviour
                 if(!controlVida.getEstado() && (controlVida.getValue() <= 4 || controlCombustible.getValue() <= 0)) {
                     Destruccion();
                 } else {
+                    audiosource.PlayOneShot(damage_sound_clip,0.7f);
                     controlVida.getDamage(); 
                     actualVida = controlVida.getValue();                    
-                }                                                      
+                    //AudioSource.PlayClipAtPoint(damage_sound_clip,transForm.position, 0.9f);
+                                        
+                    // print("HELLO WORLD COLLISION***************");
+                }                     
+                break;
+            default:
                 break;        
         }
     }
