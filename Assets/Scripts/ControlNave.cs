@@ -11,12 +11,8 @@ public class ControlNave : MonoBehaviour
     AudioClip damage_sound_clip;
     Rigidbody rigidBody;
     Transform transForm;
-<<<<<<< HEAD
-    AudioSource audiosource;    
-=======
     AudioSource[] sonidos;
 
->>>>>>> origin/Test
     GameObject grupoEfecto;
     GameObject unicoEfecto;
     ParticleSystem propulsion;
@@ -81,13 +77,8 @@ public class ControlNave : MonoBehaviour
                 unicoEfecto.GetComponent<ParticleSystem>().Play();            
                 controlTiempo.setOff();               
                 StartCoroutine(EsperarSiguiente()); 
-<<<<<<< HEAD
-                // print("COLLISION NIVEL 1*****+");
-                break;              
-=======
                 break;
             
->>>>>>> origin/Test
         }
     }
 
@@ -100,18 +91,8 @@ public class ControlNave : MonoBehaviour
                 } else {
                     audiosource.PlayOneShot(damage_sound_clip,0.7f);
                     controlVida.getDamage(); 
-<<<<<<< HEAD
-                    actualVida = controlVida.getValue();                    
-                    //AudioSource.PlayClipAtPoint(damage_sound_clip,transForm.position, 0.9f);
-                                        
-                    // print("HELLO WORLD COLLISION***************");
-                }                     
-                break;
-            default:
-=======
                     actualVida = controlVida.getValue();                 
                 }                                                      
->>>>>>> origin/Test
                 break;        
         }
     }
