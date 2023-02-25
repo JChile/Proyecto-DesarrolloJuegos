@@ -38,7 +38,6 @@ public class ControlNave : MonoBehaviour
         if (GameObject.FindGameObjectWithTag("MusicaTag") != null)
         {
             GameObject.FindGameObjectWithTag("MusicaTag").GetComponent<ControlMusica>().PlayMusic();
-
         }        
         rigidBody.sleepThreshold = 0;
         // damage_sound_clip = AudioClip.Create("damage_sound",audiosource.clip.samples,audiosource.clip.channels,audiosource.clip.frequency,true);
